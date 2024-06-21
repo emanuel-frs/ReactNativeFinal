@@ -1,7 +1,9 @@
 import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { JogoEspecificoProps } from '../../routes/stack';
 
+// Esta lista será substituida por uma requisição de GET na api, que utilizara o id pego pelo route para pegar as informações
 const lista = [
     {
         id: 1,
@@ -9,11 +11,13 @@ const lista = [
         dataLanc: "21/03/2014",
         genero: "Terror",
         descricao: "Jogo de terror",
-        img: require('../../../assets/icon.png')
+        img: require('../../../assets/Screenshot_1.jpg')
     }
 ]
 
-export default function JogoEspecifico() {
+export default function JogoEspecifico({ route }: JogoEspecificoProps) {
+    const { id } = route.params;
+
     return (
         <View style={styles.container}>
             {lista.length > 0 ? lista.map((item) => {
@@ -39,7 +43,7 @@ export default function JogoEspecifico() {
                             </View>
                             <View style={styles.jogoInfosContainerInferior}>
                                 <View style={styles.jogoPreçoContainer}>
-                                    <Ionicons name="pricetags-sharp" size={32} color="#FDE251" /><Text style={styles.jogoPreço}>R$ 219,99</Text>
+                                    <Ionicons name="pricetags-sharp" size={32} color="#FDE251" /><Text style={styles.jogoPreço}>R$ {id}</Text>
                                 </View>
                                 <TouchableOpacity style={styles.editarBtn}>
                                     <Text style={styles.editBtnTexto}>

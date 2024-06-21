@@ -1,20 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './src/pages/Home';
+import { NavigationContainer } from "@react-navigation/native";
+import StackComponent from './src/routes/stack';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Home/>
-    </View>
+    <NavigationContainer>
+      <StackComponent/>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

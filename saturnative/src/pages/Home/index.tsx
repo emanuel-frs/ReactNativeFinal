@@ -1,12 +1,13 @@
-import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { styles } from './styles';
 import JogoCard from '../../components/JogoCard';
 
+//Esta lista será substituida por uma requisição na API usando useEffect
 const lista = [
     {
         id: 1,
         name: "nome do jogo",
-        img: require('../../../assets/splash.png')
+        img: require('../../../assets/Screenshot_1.jpg')
     },
     {
         id: 2,
@@ -35,11 +36,11 @@ export default function Home() {
         <View style={styles.container}>
             <FlatList
                 data={lista}
-                keyExtractor={item => item.id.toString()}
+                keyExtractor={(item) => item.id.toString()}
                 ItemSeparatorComponent={() => <View style={{height: 20}}/>}
                 renderItem={({ item }) => {
                     return (
-                        <JogoCard jogo={item}/>
+                        <JogoCard key={item.id} jogo={item}/>
                     )
                 }}
             />
