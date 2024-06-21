@@ -29,7 +29,7 @@ const lista = [
     },
 ]
 
-const Home = () => {
+export default function Jogos() {
     return (
         <View style={styles.container}>
             <FlatList
@@ -58,4 +58,3 @@ const Home = () => {
     );
 };
 
-export default Home;
