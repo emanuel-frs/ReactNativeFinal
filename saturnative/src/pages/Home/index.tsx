@@ -1,5 +1,6 @@
 import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
+import JogoCard from '../../components/JogoCard';
 
 const lista = [
     {
@@ -38,19 +39,7 @@ export default function Home() {
                 ItemSeparatorComponent={() => <View style={{height: 20}}/>}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.jogoCard} >
-                            <Image style={styles.jogoImg} source={item.img} />
-                            <View style={styles.jogoInfo}>
-                                <Text style={styles.jogoName}>
-                                    {item.name}
-                                </Text>
-                                <TouchableOpacity style={styles.jogoBtn}>
-                                    <Text style={styles.jogoBtnText}>
-                                        Detalhes
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
+                        <JogoCard jogo={item}/>
                     )
                 }}
             />
