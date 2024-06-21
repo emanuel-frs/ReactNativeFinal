@@ -29,7 +29,7 @@ const lista = [
     },
 ]
 
-export default function Jogos() {
+export default function Home() {
     return (
         <View style={styles.container}>
             <FlatList
