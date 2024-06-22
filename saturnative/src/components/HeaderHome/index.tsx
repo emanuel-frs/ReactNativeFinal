@@ -1,10 +1,9 @@
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { View } from "react-native";
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { View, TouchableOpacity, Image, StyleSheet, Text } from "react-native";
+import { Feather } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { StackTypes } from "../../routes/stack";
 
-export default function HeaderJogoEspecifico() {
+export default function HeaderHome() {
 
     // const navigation = useNavigation<StackTypes>();
 
@@ -13,9 +12,10 @@ export default function HeaderJogoEspecifico() {
             <TouchableOpacity onPress={() => {
                 // navigation.goBack()
             }}>
-                <FontAwesome5 name="long-arrow-alt-left" size={30} color="#FDE251" />
+                <Feather name="menu" size={24} color="black" />
             </TouchableOpacity>
-            <Image style={{width: 50, height: 50}} source={require('../../../assets/logos/logoYellow.png')}/>
+            <Text style={{fontSize: 25}}>Home</Text>
+            <Image style={{width: 50, height: 50}} source={require('../../../assets/logos/logoDark.png')}/>
         </View>
     )
 }
@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
         height: 90,
         alignItems:'center',
         justifyContent: "space-between",
-        paddingTop: 30,
+        paddingTop:30,
         paddingLeft: 20,
         paddingRight: 20,
-        backgroundColor: '#14151E',
+        backgroundColor: '#FDE251',
         flexDirection: 'row',
     },
 

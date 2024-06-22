@@ -4,6 +4,11 @@ import { Linking } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import styles from './styles'
 
+const Khezac = require('../../../assets/Khezac.jpg');
+const Leo = require('../../../assets/leo.webp');
+const Emanuel = require('../../../assets/Emanuel.jpg');
+const Lucas = require('../../../assets/Lucas.jpg');
+
 interface LinkProps {
   url: string;
   children: React.ReactNode;
@@ -27,7 +32,7 @@ export default function SobreNos() {
         <View style={styles.barra} />
       <View style={styles.containerFilho}>
         <Image
-          source={{ uri: 'https://static.vecteezy.com/ti/vetor-gratis/p3/3715527-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-vetor.jpg' }}
+          source={Khezac}
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
@@ -43,7 +48,7 @@ export default function SobreNos() {
       </View>
       <View style={styles.containerFilho}>
         <Image
-          source={{ uri: 'https://static.vecteezy.com/ti/vetor-gratis/p3/3715527-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-vetor.jpg' }}
+          source={Leo}
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
@@ -75,7 +80,7 @@ export default function SobreNos() {
       </View>
       <View style={styles.containerFilho}>
         <Image
-          source={{ uri: 'https://static.vecteezy.com/ti/vetor-gratis/p3/3715527-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-vetor.jpg' }}
+          source={Emanuel}
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
@@ -91,7 +96,7 @@ export default function SobreNos() {
       </View>
       <View style={styles.containerFilho}>
         <Image
-          source={{ uri: 'https://static.vecteezy.com/ti/vetor-gratis/p3/3715527-imagem-perfil-icone-masculino-icone-humano-ou-pessoa-sinal-e-simbolo-vetor.jpg' }}
+          source={Lucas}
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
