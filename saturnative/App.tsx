@@ -5,6 +5,6 @@ export default function App() {
   return (
     <NavigationContainer>
       <StackComponent/>
-    </NavigationContainer>
+    </NavigationContainer> 
   );
 }
