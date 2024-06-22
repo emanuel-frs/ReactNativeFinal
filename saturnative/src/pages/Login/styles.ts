@@ -5,32 +5,37 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#14151E'
+        backgroundColor: '#14151E',
+        padding: 40,
+        paddingBottom: 0
     },
 
     logo: {
         marginTop: -20,
-        maxWidth: 300, 
-        maxHeight: 300, 
+        maxWidth: 209, 
+        maxHeight: 209, 
         resizeMode: 'contain', 
     },
     containerLogin: {
-        flex: 1,
         alignItems: 'center',
-        width: '90%',
+        width: '100%',
     },
     input: {
+        marginVertical: 5,
+        marginBottom: 0,
+        color: '#FDE251',
+        width: '100%',
+        height: 44,
+        borderRadius: 21,
         backgroundColor: '#1D1E2B',
-        width: '90%',
-        marginBottom: 20,
-        color: '#FDE24F',
-        borderRadius: 25,
-        padding: 7,
+        borderWidth: 2,
+        borderColor: '#373A4D',
+        paddingHorizontal: 15,
     },
     btnEntrar: {
         backgroundColor: '#1D1E2B',
-        width: '25%',
-        height: 40,
+        width: 110,
+        height: 55,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 100,
@@ -39,25 +44,26 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: -45,
-        fontSize: 40,
+        fontSize: 36,
         color: '#FDE24F',
-
     },
     tituloEntrar2: {
         marginTop: 80,
         marginBottom: 30,
-        fontSize: 25,
+        fontSize: 36,
         color: '#FDE24F',
 
     },
     textImput: {
         color: '#FDE24F',
         padding: 5,
-        width: 250,
-
-
+        width: '100%',
+        fontSize: 15,
+        marginTop: 15,
+        paddingHorizontal: 15,
+    },
+    containerBtn:{
+        height:150,
+        justifyContent: 'center'
     }
-
-
-
 });

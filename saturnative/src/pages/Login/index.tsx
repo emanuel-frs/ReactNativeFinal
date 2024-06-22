@@ -4,9 +4,6 @@ import { styles } from "./styles";
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
-
-
 export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -45,9 +42,11 @@ export default function Login() {
                     secureTextEntry 
                     onChangeText={(text) => setPassword(text)}
                 />
-                <TouchableOpacity style={styles.btnEntrar} onPress={handleLogin}>
-                    <Text> <Icon name="paper-plane" size={25} color="#fff" /></Text>
-                </TouchableOpacity>
+                <View style={styles.containerBtn}>
+                    <TouchableOpacity style={styles.btnEntrar} onPress={handleLogin}>
+                        <Text> <Icon name="paper-plane" size={30} color="#fff" /></Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </KeyboardAvoidingView>
     );
