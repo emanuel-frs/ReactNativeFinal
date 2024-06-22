@@ -2,6 +2,7 @@ import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { JogoEspecificoProps } from '../../routes/stack';
+import { useNavigation } from '@react-navigation/native';
 
 // Esta lista será substituida por uma requisição de GET na api, que utilizara o id pego pelo route para pegar as informações
 const lista = [
@@ -16,7 +17,12 @@ const lista = [
 ]
 
 export default function JogoEspecifico({ route }: JogoEspecificoProps) {
+    const navigation = useNavigation();
     const { id } = route.params;
+
+    const handleEditar = () => {
+        navigation.navigate('Edicao')
+    }
 
     return (
         <View style={styles.container}>
@@ -45,7 +51,7 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
                                 <View style={styles.jogoPreçoContainer}>
                                     <Ionicons name="pricetags-sharp" size={32} color="#FDE251" /><Text style={styles.jogoPreço}>R$ {id}</Text>
                                 </View>
-                                <TouchableOpacity style={styles.editarBtn}>
+                                <TouchableOpacity style={styles.editarBtn} onPress={handleEditar}>
                                     <Text style={styles.editBtnTexto}>
                                         Editar Jogo
                                     </Text>

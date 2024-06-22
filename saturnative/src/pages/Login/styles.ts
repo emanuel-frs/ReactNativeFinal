@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     btnEntrar: {
-        backgroundColor: '#1D1E2B',
+        backgroundColor: '#D92744',
         width: 110,
         height: 55,
         alignItems: 'center',
@@ -65,5 +65,19 @@ export const styles = StyleSheet.create({
     containerBtn:{
         height:150,
         justifyContent: 'center'
+    },
+    btnBloqueado:{
+        backgroundColor: '#2B2C34',
+        width: 110,
+        height: 55,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 100,
+    },
+    invalido:{
+        color: '#D92744'
+    },
+    inputErro:{
+        borderColor: 'red'
     }
 });

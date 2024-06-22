@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-nativ
 import Imagem from '../../components/ImagePicker/ImagePicker';
 import InputDeData from '../../components/InputDeData/InputDeData';
 import PriceInput from '../../components/InputDePreco/InputDePreco';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Cadastro() {
     const [nomeJogo, setNomeJogo] = useState('');
@@ -13,8 +14,14 @@ export default function Cadastro() {
     const [dataValida, setDataValida] = useState(true);
     const [enviado, setEnviado] = useState(false);
     const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(null);
+    const navigation = useNavigation();
+
+    const handleCancelar = () => {
+        navigation.goBack()
+    }
 
     const todosCamposPreenchidos = () => {
+
         return (
             nomeJogo !== '' &&
             dataLancamento !== '' &&
@@ -96,7 +103,7 @@ export default function Cadastro() {
                     >
                         <Text style={styles.textEnviar}>Enviar</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.cancelar}>
+                    <TouchableOpacity style={styles.cancelar} onPress={handleCancelar}>
                         <Text style={styles.textCancelar}>Cancelar</Text>
                     </TouchableOpacity>
                 </View>
