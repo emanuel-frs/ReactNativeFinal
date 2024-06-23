@@ -39,8 +39,8 @@ export default function DrawerComponent() {
             backgroundColor: '#FDE251',
             paddingHorizontal: 10,
             },
-
-        }}>
+        }}
+        initialRouteName="Home">
             <Screen
                 name="Home"
                 component={Home}

@@ -28,7 +28,7 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
         <View style={styles.container}>
             {lista.length > 0 ? lista.map((item) => {
                 return (
-                    <View style={{ flex: 1 }}>
+                    <View key={item.id} style={{ flex: 1 }}>
                         <Image style={styles.jogoImg} source={item.img} />
                         <View style={styles.jogoInfosWrapper}>
                             <View style={styles.jogoInfosContainer}>

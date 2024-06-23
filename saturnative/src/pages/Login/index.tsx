@@ -8,7 +8,7 @@ export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalido, setInvalido] = useState<boolean>(false);
-    const navigation = useNavigation(); 
+    const navigation = useNavigation();
 
     const todosCamposPreenchidos = () => {
         return (
@@ -19,7 +19,7 @@ export default function Login() {
 
     const handleLogin = () => {
         if (username === 'admin' && password === '1234') { 
-            navigation.navigate('Home');
+            navigation.navigate('Drawer');
             setInvalido(false);
         } else {
             setInvalido(true);

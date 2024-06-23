@@ -9,7 +9,7 @@ import DrawerComponent from "./drawer";
 import HeaderEdicao from "../components/HeaderEdicao";
 
 type StackNavigation = {
-    Home: undefined,
+    Drawer: undefined,
     JogoEspecifico: { id: number }
     Login: undefined,
     Edicao: undefined,
@@ -18,7 +18,7 @@ type StackNavigation = {
 }
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
-export type HomeProps = NativeStackScreenProps<StackNavigation, "Home">;
+export type HomeProps = NativeStackScreenProps<StackNavigation, "Drawer">;
 export type JogoEspecificoProps = NativeStackScreenProps<StackNavigation, "JogoEspecifico">;
 export type ScreenLogin = NativeStackScreenProps<StackNavigation, "Login">;
 export type EdicaoProps = NativeStackScreenProps<StackNavigation, "Edicao">;
@@ -31,13 +31,13 @@ export default function StackComponent() {
     return(
         <Navigator initialRouteName="Login">
             <Screen
-                name="Login"
-                component={Login}
+                name="Drawer"
+                component={DrawerComponent}
                 options={{headerShown:(false)}}
             />
             <Screen
-                name="Home"
-                component={DrawerComponent}
+                name="Login"
+                component={Login}
                 options={{headerShown:(false)}}
             />
             <Screen
