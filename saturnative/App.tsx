@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from 'expo-splash-screen';
 import StackComponent from './src/routes/stack';
 import { Splash } from "./src/components/Splash/SplashScreen";
-import DrawerComponent from "./src/components/Drawer/Drawer";
 
 export default function App() {
   const [isSplashComplete, setIsSplashComplete] = useState(false);

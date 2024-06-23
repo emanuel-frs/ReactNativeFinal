@@ -48,7 +48,6 @@ export default function Edicao() {
     return (
         <>
             <View style={styles.container}>
-                <View style={styles.drawer}></View>
                 <View style={styles.forms}>
                     <View style={styles.imagem}>
                         <Imagem onImageSelected={setImagemSelecionada} />

@@ -2,15 +2,16 @@ import { View, TouchableOpacity, Image, StyleSheet, Text } from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { StackTypes } from "../../routes/stack";
+import { DrawerTypes } from "../../routes/drawer";
 
 export default function HeaderSobreNos() {
 
-    // const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<DrawerTypes>();
 
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={() => {
-                // navigation.goBack()
+                navigation.toggleDrawer()
             }}>
                 <Feather name="menu" size={24} color="#FDE251" />
             </TouchableOpacity>
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
         paddingTop:30,
         paddingLeft: 20,
         paddingRight: 20,
-        backgroundColor: '#14151E',
+        backgroundColor: '#1D1E2B',
         flexDirection: 'row',
     },
 

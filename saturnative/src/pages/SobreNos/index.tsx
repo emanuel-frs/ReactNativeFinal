@@ -29,7 +29,6 @@ const Link: React.FC<LinkProps> = ({ url, children }) => {
 export default function SobreNos() {
   return (
     <ScrollView contentContainerStyle={styles.containerPai}>
-        <View style={styles.barra} />
       <View style={styles.containerFilho}>
         <Image
           source={Khezac}

@@ -5,12 +5,12 @@ import { StackTypes } from "../../routes/stack";
 
 export default function HeaderCadastro() {
 
-    // const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<StackTypes>();
 
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={() => {
-                // navigation.goBack()
+                navigation.goBack()
             }}>
                 <FontAwesome5 name="long-arrow-alt-left" size={30} color="#14151E" />
             </TouchableOpacity>

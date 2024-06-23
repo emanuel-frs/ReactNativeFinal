@@ -2,15 +2,16 @@ import { View, TouchableOpacity, Image, StyleSheet, Text } from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { StackTypes } from "../../routes/stack";
+import { DrawerTypes } from "../../routes/drawer";
 
 export default function HeaderHome() {
 
-    // const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<DrawerTypes>();
 
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={() => {
-                // navigation.goBack()
+                navigation.toggleDrawer()
             }}>
                 <Feather name="menu" size={24} color="black" />
             </TouchableOpacity>

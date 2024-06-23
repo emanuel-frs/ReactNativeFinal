@@ -1,12 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack"
-import Home from "../pages/Home";
 import Login from "../pages/Login";
 import JogoEspecifico from "../pages/JogoEspecifico";
 import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import HeaderJogoEspecifico from "../components/HeaderJogoEspecifico";
 import Edicao from "../pages/Edicao/Edicao";
 import Cadastro from "../pages/Cadastro/Cadastro";
-import SobreNos from "../pages/SobreNos";
+import DrawerComponent from "./drawer";
+import HeaderEdicao from "../components/HeaderEdicao";
 
 type StackNavigation = {
     Home: undefined,
@@ -37,8 +37,8 @@ export default function StackComponent() {
             />
             <Screen
                 name="Home"
-                component={Home}
-                options={{title: "Home"}}
+                component={DrawerComponent}
+                options={{headerShown:(false)}}
             />
             <Screen
                 name="JogoEspecifico"
@@ -48,7 +48,7 @@ export default function StackComponent() {
             <Screen
                 name="Edicao"
                 component={Edicao}
-                options={{headerShown:(false)}}
+                options={{header: () => <HeaderEdicao/>}}
             />
             <Screen
                 name="Cadastro"
@@ -57,7 +57,7 @@ export default function StackComponent() {
             />
             <Screen
                 name="SobreNos"
-                component={SobreNos}
+                component={DrawerComponent}
                 options={{headerShown:(false)}}
             />
         </Navigator>
