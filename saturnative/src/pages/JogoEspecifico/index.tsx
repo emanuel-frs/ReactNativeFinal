@@ -1,61 +1,78 @@
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { JogoEspecificoProps } from '../../routes/stack';
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TemCerteza } from '../../components/Modal/Modal';
+import { getJogoById } from '../../services/jogosServices';
 
-// Esta lista será substituída por uma requisição de GET na api, que utilizará o id pego pelo route para pegar as informações
-const lista = [
-    {
-        id: 1,
-        name: "nome do jogo",
-        dataLanc: "21/03/2014",
-        genero: "Terror",
-        descricao: "Jogo de terror",
-        img: require('../../../assets/Screenshot_1.jpg')
-    }
-]
+type JogoType = {
+    dataLancamento: string,
+    descricao: string,
+    genero: string,
+    id: string,
+    img: string,
+    nome: string,
+    preco: string
+}
 
 export default function JogoEspecifico({ route }: JogoEspecificoProps) {
     const [modalVisible, setModalVisible] = useState(false);
+    const [jogo, setJogo] = useState<JogoType>();
+    const [isLoading, setIsLoading] = useState<boolean>();
+
     const navigation: any = useNavigation();
+
     const { id } = route.params;
 
+    const getJogo = async () => {
+        setIsLoading(true)
+        try {
+            const { data } = await getJogoById(id);
+            setJogo(data)
+        } catch(err) {
+            console.log(err)
+        }
+        setIsLoading(false)
+    }
+
+    useEffect(()=>{
+        getJogo()
+    },[])
+
     const handleEditar = () => {
-        navigation.navigate('Edicao');
+        navigation.navigate('Edicao', {id: id});
     }
 
     return (
         <>
         <TemCerteza visible={modalVisible} onClose={() => setModalVisible(false)}/>
         <View style={styles.container}>
-            {lista.length > 0 ? lista.map((item) => {
-                return (
-                    <View key={item.id} style={{ flex: 1 }}>
-                        <Image style={styles.jogoImg} source={item.img} />
+            {jogo && isLoading == false ? (
+                <View key={jogo.id} style={{ flex: 1 }}>
+                        <Image style={styles.jogoImg} source={{uri: jogo.img}} />
                         <View style={styles.jogoInfosWrapper}>
                             <View style={styles.jogoInfosContainer}>
                                 <Text style={[styles.jogoNome, styles.padraoText]}>
-                                    Nome do jogo
+                                    {jogo.nome}
                                 </Text>
                                 <View style={styles.jogoInfosBasicasContainer}>
                                     <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
-                                        Data de lançamento: <Text style={styles.jogoInfosBasicasValue}>{item.dataLanc}</Text>
+                                        Data de lançamento: <Text style={styles.jogoInfosBasicasValue}>{jogo.dataLancamento}</Text>
                                     </Text>
                                     <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
-                                        Gênero: <Text style={styles.jogoInfosBasicasValue}>{item.genero}</Text>
+                                        Gênero: <Text style={styles.jogoInfosBasicasValue}>{jogo.genero}</Text>
                                     </Text>
                                     <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
-                                        Descrição: <Text style={styles.jogoInfosBasicasValue}>{item.descricao}</Text>
+                                        Descrição: <Text style={styles.jogoInfosBasicasValue}>{jogo.descricao}</Text>
                                     </Text>
                                 </View>
                             </View>
                             <View style={styles.jogoInfosContainerInferior}>
                                 <View style={styles.jogoPreçoContainer}>
                                     <Ionicons name="pricetags-sharp" size={32} color="#FDE251" />
-                                    <Text style={[styles.jogoPreço, styles.padraoText]}>R$ {id}</Text>
+                                    <Text style={[styles.jogoPreço, styles.padraoText]}>R$ {jogo.preco}</Text>
                                 </View>
                                 <TouchableOpacity style={styles.editarBtn} onPress={handleEditar}>
                                     <Text style={[styles.editBtnTexto, styles.padraoText]}>
@@ -70,8 +87,11 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
                             </View>
                         </View>
                     </View>
-                )
-            }) : (
+                    ) : isLoading ? (
+                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <ActivityIndicator size={100} color={'#FDE251'}/>
+                        </View>
+                    ) : (
                 <View style={styles.erroContainer}>
                     <Text style={[styles.naoEncontrado, styles.padraoText]}>
                         Jogo Não Encontrado

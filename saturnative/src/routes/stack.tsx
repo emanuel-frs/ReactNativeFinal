@@ -12,7 +12,7 @@ type StackNavigation = {
     Drawer: undefined,
     JogoEspecifico: { id: number }
     Login: undefined,
-    Edicao: undefined,
+    Edicao: { id: number | string },
     Cadastro: undefined,
     SobreNos: undefined
 }

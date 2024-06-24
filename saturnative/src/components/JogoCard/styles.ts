@@ -27,7 +27,7 @@ jogoInfo: {
 },
 jogoName: {
     color: '#FDE251',
-    fontSize: 24
+    fontSize: 18
 },
 jogoBtn: {
     backgroundColor: '#FDE251',
