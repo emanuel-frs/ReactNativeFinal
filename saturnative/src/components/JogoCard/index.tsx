@@ -6,7 +6,7 @@ import { StackTypes } from "../../routes/stack";
 type JogoCardProp = {
     jogo: {
         id: number,
-        name: string,
+        nome: string,
         img: any
     },
 }
@@ -21,10 +21,10 @@ export default function JogoCard({ jogo }: JogoCardProp) {
 
     return (
         <View style={styles.jogoCard} >
-            <Image style={styles.jogoImg} source={jogo.img} />
+            <Image style={styles.jogoImg} source={{uri: jogo.img}} />
             <View style={styles.jogoInfo}>
                 <Text style={[styles.jogoName,styles.padraoText]}>
-                    {jogo.name}
+                    {jogo.nome}
                 </Text>
                 <TouchableOpacity style={styles.jogoBtn} onPress={() => handleDetalhes(jogo.id)}>
                     <Text style={[styles.jogoBtnText,styles.padraoText]}>
