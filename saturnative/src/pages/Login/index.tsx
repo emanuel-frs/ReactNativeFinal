@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { KeyboardAvoidingView, View, Image, TouchableOpacity, TextInput, Text } from "react-native"
 import { styles } from "./styles";
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from "@expo/vector-icons";
+import * as SecureStore from 'expo-secure-store';
+import { User, UserContext, UserContextType } from "../../contexts/UserContext";
+
 
 export default function Login() {
+    
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalido, setInvalido] = useState<boolean>(false);
     const navigation : any = useNavigation();
+    const {users} = useContext(UserContext) as UserContextType;
 
     const todosCamposPreenchidos = () => {
         return (
@@ -17,8 +22,10 @@ export default function Login() {
         );
     };
 
-    const handleLogin = () => {
-        if (username === 'a' && password === '1') {
+    const handleLogin = async () => {
+        const user = users.find((user : User) => user.username === username && user.senha === password);
+        if (user) {
+            await SecureStore.setItemAsync('user', JSON.stringify(user));
             navigation.navigate('Drawer');
             setInvalido(false);
         } else {

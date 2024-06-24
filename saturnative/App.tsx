@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import StackComponent from './src/routes/stack';
 import { Splash } from "./src/components/Splash/SplashScreen";
 import { useFonts } from 'expo-font';
+import { UserProvider } from "./src/contexts/UserContext";
 
 export default function App() {
   const [isSplashComplete, setIsSplashComplete] = useState(false);
@@ -48,8 +49,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <StackComponent />
-    </NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
+        <StackComponent />
+      </NavigationContainer>
+    </UserProvider>
   );
 }

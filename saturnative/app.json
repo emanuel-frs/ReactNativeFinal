@@ -27,9 +27,12 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/MuseoModerno-VariableFont_wght.ttf"]
+          "fonts": [
+            "./assets/fonts/MuseoModerno-VariableFont_wght.ttf"
+          ]
         }
-      ]
+      ],
+      "expo-secure-store"
     ]
   }
 }
