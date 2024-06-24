@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity } from 'react-native';
 import Imagem from '../../components/ImagePicker/ImagePicker';
 import InputDeData from '../../components/InputDeData/InputDeData';
 import PriceInput from '../../components/InputDePreco/InputDePreco';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./styles";
+import { ScrollView } from 'react-native-gesture-handler';
+import { postJogo } from '../../services/jogosServices';
+import { DrawerTypes } from '../../routes/drawer';
 
 export default function Cadastro() {
     const [nomeJogo, setNomeJogo] = useState('');
@@ -13,10 +16,17 @@ export default function Cadastro() {
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState(0);
     const [dataValida, setDataValida] = useState(true);
-    const [enviado, setEnviado] = useState(false);
     const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(null);
-    const navigation = useNavigation();
+    const navigation = useNavigation<DrawerTypes>();
 
+    const criaNovoJogo = async(jogo:{}) => {
+        try {
+            const {data} = await postJogo(jogo)
+            console.log(data)
+        } catch(err) {
+            console.log(err)
+        }
+    }
 
     const handleCancelar = () => {
         navigation.goBack()
@@ -36,78 +46,82 @@ export default function Cadastro() {
 
     const handleEnviar = () => {
         if (todosCamposPreenchidos()) {
-            console.log('Nome do Jogo:', nomeJogo);
-            console.log('Data de Lançamento:', dataLancamento);
-            console.log('Gênero:', genero);
-            console.log('Descrição:', descricao);
-            console.log('Preço:', preco);
-            console.log('Imagem:', imagemSelecionada);
-            setEnviado(true);
+            const novoJogo = {
+                nome: nomeJogo,
+                dataLancamento: dataLancamento,
+                genero: genero,
+                descricao: descricao,
+                img: imagemSelecionada,
+                preco: preco
+            }
+            criaNovoJogo(novoJogo);
         }
     };
 
     return (
         <>
-            <View style={styles.container}>
-                <View style={styles.forms}>
-                    <View style={styles.imagem}>
-                        <Imagem onImageSelected={setImagemSelecionada} />
+            <ScrollView>
+                <View style={styles.container}>
+                    <View style={styles.forms}>
+                        <View style={styles.imagem}>
+                            <Imagem onImageSelected={setImagemSelecionada} />
+                        </View>
+                        <View>
+                            <Text style={[styles.placeholder, styles.padraoText]}>Nome do jogo</Text>
+                            <TextInput
+                                style={[styles.input, styles.padraoText]}
+                                value={nomeJogo}
+                                onChangeText={(text) => setNomeJogo(text)}
+                            />
+                        </View>
+                        <View>
+                            <Text style={[styles.placeholder, styles.padraoText]}>Data de lançamento</Text>
+                            <InputDeData
+                                value={dataLancamento}
+                                onChange={(text, isValid) => {
+                                    setDataLancamento(text);
+                                    setDataValida(isValid);
+                                }}
+                            />
+                            {!dataValida && <Text style={styles.errorText}>Data inválida</Text>}
+                        </View>
+                        <View>
+                            <Text style={[styles.placeholder, styles.padraoText]}>Gênero</Text>
+                            <TextInput
+                                style={[styles.input, styles.padraoText]}
+                                value={genero}
+                                onChangeText={(text) => setGenero(text)}
+                            />
+                        </View>
+                        <View>
+                            <Text style={[styles.placeholder, styles.padraoText]}>Descrição</Text>
+                            <TextInput
+                                style={[styles.input, styles.padraoText]}
+                                value={descricao}
+                                onChangeText={(text) => setDescricao(text)}
+                            />
+                        </View>
+                        <View>
+                            <Text style={[styles.placeholder, styles.padraoText]}>Preço</Text>
+                            <PriceInput
+                                onPriceChange={(newPrice) => setPreco(newPrice)}
+                            />
+                        </View>
                     </View>
-                    <View>
-                        <Text style={[styles.placeholder, styles.padraoText]}>Nome do jogo</Text>
-                        <TextInput
-                            style={[styles.input, styles.padraoText]}
-                            value={nomeJogo}
-                            onChangeText={(text) => setNomeJogo(text)}
-                        />
-                    </View>
-                    <View>
-                        <Text style={[styles.placeholder, styles.padraoText]}>Data de lançamento</Text>
-                        <InputDeData
-                            value={dataLancamento}
-                            onChange={(text, isValid) => {
-                                setDataLancamento(text);
-                                setDataValida(isValid);
-                            }}
-                        />
-                        {!dataValida && <Text style={styles.errorText}>Data inválida</Text>}
-                    </View>
-                    <View>
-                        <Text style={[styles.placeholder, styles.padraoText]}>Gênero</Text>
-                        <TextInput
-                            style={[styles.input, styles.padraoText]}
-                            value={genero}
-                            onChangeText={(text) => setGenero(text)}
-                        />
-                    </View>
-                    <View>
-                        <Text style={[styles.placeholder, styles.padraoText]}>Descrição</Text>
-                        <TextInput
-                            style={[styles.input, styles.padraoText]}
-                            value={descricao}
-                            onChangeText={(text) => setDescricao(text)}
-                        />
-                    </View>
-                    <View>
-                        <Text style={[styles.placeholder, styles.padraoText]}>Preço</Text>
-                        <PriceInput
-                            onPriceChange={(newPrice) => setPreco(newPrice)}
-                        />
+                    <View style={styles.botoes}>
+                        <TouchableOpacity
+                            style={[styles.enviar, !todosCamposPreenchidos() && { opacity: 0.5 }]}
+                            disabled={!todosCamposPreenchidos()}
+                            onPress={handleEnviar}
+                        >
+                            <Text style={[styles.textEnviar, styles.padraoText]}>Enviar</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.cancelar} onPress={handleCancelar}>
+                            <Text style={[styles.textCancelar, styles.padraoText]}>Cancelar</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.botoes}>
-                    <TouchableOpacity
-                        style={[styles.enviar, !todosCamposPreenchidos() && { opacity: 0.5 }]}
-                        disabled={!todosCamposPreenchidos()}
-                        onPress={handleEnviar}
-                    >
-                        <Text style={[styles.textEnviar, styles.padraoText]}>Enviar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cancelar} onPress={handleCancelar}>
-                        <Text style={[styles.textCancelar, styles.padraoText]}>Cancelar</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            </ScrollView>
         </>
     );
 }
