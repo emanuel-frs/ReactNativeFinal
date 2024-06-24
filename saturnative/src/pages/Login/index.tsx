@@ -18,7 +18,7 @@ export default function Login() {
     };
 
     const handleLogin = () => {
-        if (username === 'a' && password === '1') { 
+        if (username === 'a' && password === '1') {
             navigation.navigate('Drawer');
             setInvalido(false);
         } else {
@@ -53,7 +53,7 @@ export default function Login() {
                 />
                 {invalido && <Text style={[styles.invalido, styles.padraoText]}>Email ou senha inválido</Text>}
                 <View style={styles.containerBtn}>
-                    <TouchableOpacity style={[todosCamposPreenchidos() ? styles.btnEntrar : styles.btnBloqueado]} onPress={handleLogin}>
+                    <TouchableOpacity disabled={todosCamposPreenchidos() ? false : true} style={[todosCamposPreenchidos() ? styles.btnEntrar : styles.btnBloqueado]} onPress={handleLogin}>
                         <Text style={styles.padraoText}> <Ionicons name="paper-plane" size={30} color="#fff" /></Text>
                     </TouchableOpacity>
                 </View>

@@ -1,6 +1,5 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../pages/Home";
-import Login from "../pages/Login";
 import { DrawerNavigationProp, DrawerScreenProps } from "@react-navigation/drawer";
 import Cadastro from "../pages/Cadastro/Cadastro";
 import SobreNos from "../pages/SobreNos";
@@ -8,6 +7,7 @@ import { StyleSheet } from "react-native";
 import HeaderCadastro from "../components/HeaderCadastro";
 import HeaderHome from "../components/HeaderHome";
 import HeaderSobreNos from "../components/HeaderSobreNos";
+import StackComponent from "./stack";
 
 export type DrawerNavigation = {
     Home: undefined,
@@ -49,9 +49,8 @@ export default function DrawerComponent() {
                 name="Home"
                 component={Home}
                 options={{header: () => <HeaderHome/>}}
-                
             />
-            <Screen 
+            <Screen
                 name="SobreNos"
                 component={SobreNos}
                 options={{header: () => <HeaderSobreNos/>}}
@@ -63,7 +62,7 @@ export default function DrawerComponent() {
             />
             <Screen
                 name="Sair"
-                component={Login}
+                component={StackComponent}
                 options={{headerShown:(false)}}
             />
         </Navigator>
