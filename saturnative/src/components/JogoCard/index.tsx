@@ -23,11 +23,11 @@ export default function JogoCard({ jogo }: JogoCardProp) {
         <View style={styles.jogoCard} >
             <Image style={styles.jogoImg} source={jogo.img} />
             <View style={styles.jogoInfo}>
-                <Text style={styles.jogoName}>
+                <Text style={[styles.jogoName,styles.padraoText]}>
                     {jogo.name}
                 </Text>
                 <TouchableOpacity style={styles.jogoBtn} onPress={() => handleDetalhes(jogo.id)}>
-                    <Text style={styles.jogoBtnText}>
+                    <Text style={[styles.jogoBtnText,styles.padraoText]}>
                         Detalhes
                     </Text>
                 </TouchableOpacity>

@@ -54,7 +54,7 @@ const InputDeData: React.FC<InputDeDataProps> = ({ value, onChange }) => {
                 value={value}
                 onChangeText={handleDateChange}
                 onBlur={() => setIsValid(isValidDate(value))}
-                style={[styles.input, !isValid ? styles.inputError : null]}
+                style={[styles.input, styles.padraoText, !isValid ? styles.inputError : null]}
                 placeholder="DD/MM/AAAA"
                 placeholderTextColor="#D2AD27"
                 keyboardType="numeric"
@@ -84,6 +84,9 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginHorizontal: 15
     },
+    padraoText:{
+        fontFamily: 'Museo-Moderno-Medium',
+    }
 });
 
 export default InputDeData;

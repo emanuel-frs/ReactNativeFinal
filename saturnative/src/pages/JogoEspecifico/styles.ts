@@ -91,6 +91,8 @@ export const styles = StyleSheet.create({
         color: '#FDE251',
         fontSize: 25,
         fontWeight: 'bold'
+    },
+    padraoText:{
+        fontFamily: 'Museo-Moderno-Medium',
     }
-
 })

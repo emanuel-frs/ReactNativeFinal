@@ -1,7 +1,6 @@
 import { View, FlatList } from 'react-native';
 import { styles } from './styles';
 import JogoCard from '../../components/JogoCard';
-import { MyDrawer } from '../../components/Drawer/Drawer';
 
 //Esta lista será substituida por uma requisição na API usando useEffect
 const lista = [

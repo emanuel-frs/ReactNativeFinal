@@ -33,7 +33,7 @@ const PriceInput: React.FC<PriceInputProps> = ({ onPriceChange }) => {
   return (
     <View>
       <TextInput
-        style={[styles.input, error ? styles.inputError : null]}
+        style={[styles.input, styles.padraoText, error ? styles.inputError : null]}
         keyboardType="numeric"
         placeholder="0,00"
         placeholderTextColor="#D2AD27"
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginHorizontal: 15,
   },
+  padraoText:{
+    fontFamily: 'Museo-Moderno-Medium',
+  }
 });
 
 export default PriceInput;

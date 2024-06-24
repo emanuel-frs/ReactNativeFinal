@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { FontAwesome6 } from '@expo/vector-icons';
 
 interface ImagemProps {
-    onImageSelected: (imageUri: string | null) => void; // Definindo o tipo da propriedade onImageSelected
+    onImageSelected: (imageUri: string | null) => void;
 }
 
 const Imagem: React.FC<ImagemProps> = ({ onImageSelected }) => {
@@ -20,7 +20,7 @@ const Imagem: React.FC<ImagemProps> = ({ onImageSelected }) => {
 
         if (!resultado.canceled && resultado.assets?.length > 0) {
             setImagemSelecionada(resultado.assets[0].uri);
-            onImageSelected(resultado.assets[0].uri); // Chama a função passada do componente pai com a URI da imagem
+            onImageSelected(resultado.assets[0].uri);
         }
     };
 
@@ -28,11 +28,11 @@ const Imagem: React.FC<ImagemProps> = ({ onImageSelected }) => {
         <View style={styles.container}>
             {imagemSelecionada ? 
                 <TouchableOpacity style={styles.botaoSelionada} onPress={selecionarImagem}>
-                    <Text style={styles.textoBotaoSelecionado}>Imagem Selecionada</Text>
+                    <Text style={[styles.textoBotaoSelecionado, styles.padraoText]}>Imagem Selecionada</Text>
                     <FontAwesome6 name="file-import" size={20} color="#FDE251"/>
                 </TouchableOpacity> :
                 <TouchableOpacity style={styles.botao} onPress={selecionarImagem}>
-                    <Text style={styles.textoBotao}>Importar Imagem</Text>
+                    <Text style={[styles.textoBotao, styles.padraoText]}>Importar Imagem</Text>
                     <FontAwesome6 name="file-import" size={20} color="#1D1E2B"/>
                 </TouchableOpacity>
             }
@@ -80,6 +80,9 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
     },
+    padraoText:{
+        fontFamily: 'Museo-Moderno-Medium',
+    }
 });
 
 export default Imagem;

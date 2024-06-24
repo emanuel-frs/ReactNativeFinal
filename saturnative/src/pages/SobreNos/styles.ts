@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     marginBottom: 5,
   },
+  padraoText:{
+    fontFamily: 'Museo-Moderno-Medium',
+}
 });
 
 export default styles;

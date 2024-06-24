@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
         borderRadius: 100,
     },
     tituloEntrar: {
+        fontFamily: 'Museo-Moderno-SemiBold',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: -45,
@@ -48,6 +49,7 @@ export const styles = StyleSheet.create({
         color: '#FDE24F',
     },
     tituloEntrar2: {
+        fontFamily: 'Museo-Moderno-Medium',
         marginTop: 80,
         marginBottom: 30,
         fontSize: 36,
@@ -55,6 +57,7 @@ export const styles = StyleSheet.create({
 
     },
     textImput: {
+        fontFamily: 'Museo-Moderno-Medium',
         color: '#FDE24F',
         padding: 5,
         width: '100%',
@@ -79,5 +82,8 @@ export const styles = StyleSheet.create({
     },
     inputErro:{
         borderColor: 'red'
+    },
+    padraoText:{
+        fontFamily: 'Museo-Moderno-Medium',
     }
 });

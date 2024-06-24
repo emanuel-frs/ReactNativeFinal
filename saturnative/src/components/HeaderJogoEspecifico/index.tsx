@@ -32,5 +32,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#14151E',
         flexDirection: 'row',
     },
-
 })

@@ -8,7 +8,7 @@ export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalido, setInvalido] = useState<boolean>(false);
-    const navigation = useNavigation();
+    const navigation : any = useNavigation();
 
     const todosCamposPreenchidos = () => {
         return (
@@ -18,7 +18,7 @@ export default function Login() {
     };
 
     const handleLogin = () => {
-        if (username === 'admin' && password === '1234') { 
+        if (username === 'a' && password === '1') { 
             navigation.navigate('Drawer');
             setInvalido(false);
         } else {
@@ -33,28 +33,28 @@ export default function Login() {
             </View>
             <Text style={styles.tituloEntrar}>SATURNATIVE</Text>
             <View>
-                <Text style={styles.tituloEntrar2}>Entrar</Text>
+                <Text style={[styles.tituloEntrar2, styles.padraoText]}>Entrar</Text>
             </View>
             <View style={styles.containerLogin}>
-                <Text style={styles.textImput}>Usuário</Text>
+                <Text style={[styles.textImput, styles.padraoText]}>Usuário</Text>
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, styles.padraoText]}
                     placeholder=''
                     autoCorrect={false}
                     onChangeText={(text) => setUsername(text)}
                 />
-                <Text style={styles.textImput}>Senha</Text>
+                <Text style={[styles.textImput, styles.padraoText]}>Senha</Text>
                 <TextInput
-                    style={[styles.input, invalido && styles.inputErro]}
+                    style={[styles.input, styles.padraoText, invalido && styles.inputErro]}
                     placeholder=''
                     autoCorrect={false}
                     secureTextEntry 
                     onChangeText={(text) => setPassword(text)}
                 />
-                {invalido && <Text style={styles.invalido}>Email ou senha inválido</Text>}
+                {invalido && <Text style={[styles.invalido, styles.padraoText]}>Email ou senha inválido</Text>}
                 <View style={styles.containerBtn}>
                     <TouchableOpacity style={[todosCamposPreenchidos() ? styles.btnEntrar : styles.btnBloqueado]} onPress={handleLogin}>
-                        <Text> <Ionicons name="paper-plane" size={30} color="#fff" /></Text>
+                        <Text style={styles.padraoText}> <Ionicons name="paper-plane" size={30} color="#fff" /></Text>
                     </TouchableOpacity>
                 </View>
             </View>

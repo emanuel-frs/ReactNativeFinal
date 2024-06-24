@@ -1,10 +1,12 @@
-import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { JogoEspecificoProps } from '../../routes/stack';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
+import { TemCerteza } from '../../components/Modal/Modal';
 
-// Esta lista será substituida por uma requisição de GET na api, que utilizara o id pego pelo route para pegar as informações
+// Esta lista será substituída por uma requisição de GET na api, que utilizará o id pego pelo route para pegar as informações
 const lista = [
     {
         id: 1,
@@ -17,14 +19,17 @@ const lista = [
 ]
 
 export default function JogoEspecifico({ route }: JogoEspecificoProps) {
-    const navigation = useNavigation();
+    const [modalVisible, setModalVisible] = useState(false);
+    const navigation: any = useNavigation();
     const { id } = route.params;
 
     const handleEditar = () => {
-        navigation.navigate('Edicao')
+        navigation.navigate('Edicao');
     }
 
     return (
+        <>
+        <TemCerteza visible={modalVisible} onClose={() => setModalVisible(false)}/>
         <View style={styles.container}>
             {lista.length > 0 ? lista.map((item) => {
                 return (
@@ -32,32 +37,33 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
                         <Image style={styles.jogoImg} source={item.img} />
                         <View style={styles.jogoInfosWrapper}>
                             <View style={styles.jogoInfosContainer}>
-                                <Text style={styles.jogoNome}>
+                                <Text style={[styles.jogoNome, styles.padraoText]}>
                                     Nome do jogo
                                 </Text>
                                 <View style={styles.jogoInfosBasicasContainer}>
-                                    <Text style={styles.jogoInfosBasicas}>
+                                    <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
                                         Data de lançamento: <Text style={styles.jogoInfosBasicasValue}>{item.dataLanc}</Text>
                                     </Text>
-                                    <Text style={styles.jogoInfosBasicas}>
+                                    <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
                                         Gênero: <Text style={styles.jogoInfosBasicasValue}>{item.genero}</Text>
                                     </Text>
-                                    <Text style={styles.jogoInfosBasicas}>
+                                    <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
                                         Descrição: <Text style={styles.jogoInfosBasicasValue}>{item.descricao}</Text>
                                     </Text>
                                 </View>
                             </View>
                             <View style={styles.jogoInfosContainerInferior}>
                                 <View style={styles.jogoPreçoContainer}>
-                                    <Ionicons name="pricetags-sharp" size={32} color="#FDE251" /><Text style={styles.jogoPreço}>R$ {id}</Text>
+                                    <Ionicons name="pricetags-sharp" size={32} color="#FDE251" />
+                                    <Text style={[styles.jogoPreço, styles.padraoText]}>R$ {id}</Text>
                                 </View>
                                 <TouchableOpacity style={styles.editarBtn} onPress={handleEditar}>
-                                    <Text style={styles.editBtnTexto}>
+                                    <Text style={[styles.editBtnTexto, styles.padraoText]}>
                                         Editar Jogo
                                     </Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.excluirBtn}>
-                                    <Text style={styles.excluirBtnTexto}>
+                                <TouchableOpacity style={styles.excluirBtn} onPress={() => setModalVisible(true)}>
+                                    <Text style={[styles.excluirBtnTexto, styles.padraoText]}>
                                         Excluir Jogo
                                     </Text>
                                 </TouchableOpacity>
@@ -67,12 +73,12 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
                 )
             }) : (
                 <View style={styles.erroContainer}>
-                    <Text style={styles.naoEncontrado}>
+                    <Text style={[styles.naoEncontrado, styles.padraoText]}>
                         Jogo Não Encontrado
                     </Text>
                 </View>
             )}
         </View >
+        </>
     );
-};
-
+}

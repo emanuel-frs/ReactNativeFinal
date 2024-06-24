@@ -9,7 +9,6 @@ jogoCard: {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    gap: 20
 },
 jogoImg: {
     width: "45%",
@@ -40,5 +39,8 @@ jogoBtn: {
 },
 jogoBtnText: {
     fontSize: 20,
+},
+padraoText:{
+    fontFamily: 'Museo-Moderno-Medium',
 }
 })

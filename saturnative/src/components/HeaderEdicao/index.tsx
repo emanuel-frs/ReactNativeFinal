@@ -14,7 +14,7 @@ export default function HeaderEdicao() {
             }}>
                 <FontAwesome5 name="long-arrow-alt-left" size={30} color="#14151E" />
             </TouchableOpacity>
-            <Text style={{fontSize: 25}}>Editar</Text>
+            <Text style={styles.padraoText}>EDITAR</Text>
             <Image style={{width: 50, height: 50}} source={require('../../../assets/logos/logoDark.png')}/>
         </View>
     )
@@ -32,5 +32,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDE251',
         flexDirection: 'row',
     },
-
+    padraoText:{
+        fontFamily: 'Museo-Moderno-Medium',
+        fontSize: 25,
+    }
 })

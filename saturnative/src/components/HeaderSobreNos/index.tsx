@@ -15,7 +15,7 @@ export default function HeaderSobreNos() {
             }}>
                 <Feather name="menu" size={24} color="#FDE251" />
             </TouchableOpacity>
-            <Text style={{fontSize: 25, color:'#FDE251'}}>Sobre Nós</Text>
+            <Text style={styles.padraoText}>SOBRE NÓS</Text>
             <Image style={{width: 50, height: 50}} source={require('../../../assets/logos/logoYellow.png')}/>
         </View>
     )
@@ -33,5 +33,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#1D1E2B',
         flexDirection: 'row',
     },
-
+    padraoText:{
+        fontFamily: 'Museo-Moderno-Medium',
+        fontSize: 25,
+        color:'#FDE251'
+    }
 })

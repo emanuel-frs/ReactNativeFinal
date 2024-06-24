@@ -36,9 +36,13 @@ export default function DrawerComponent() {
             drawerActiveBackgroundColor: '#373A4D',
             drawerInactiveBackgroundColor: '#14151E',
             drawerStyle:{
-            backgroundColor: '#FDE251',
-            paddingHorizontal: 10,
+                backgroundColor: '#FDE251',
+                paddingHorizontal: 10,
             },
+            drawerLabelStyle:{
+                fontFamily: 'Museo-Moderno-Medium',
+                fontSize: 16
+            }
         }}
         initialRouteName="Home">
             <Screen

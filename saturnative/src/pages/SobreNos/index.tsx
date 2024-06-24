@@ -1,13 +1,13 @@
 import React from 'react';
-import { Image, StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Linking } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import styles from './styles'
 
-const Khezac = require('../../../assets/Khezac.jpg');
-const Leo = require('../../../assets/leo.webp');
-const Emanuel = require('../../../assets/Emanuel.jpg');
-const Lucas = require('../../../assets/Lucas.jpg');
+const Khezac = require('../../../assets/perfis/Khezac.jpg');
+const Leo = require('../../../assets/perfis/leo.webp');
+const Emanuel = require('../../../assets/perfis/Emanuel.jpg');
+const Lucas = require('../../../assets/perfis/Lucas.jpg');
 
 interface LinkProps {
   url: string;
@@ -35,13 +35,13 @@ export default function SobreNos() {
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
-          <Link url="https://www.linkedin.com/in/khezac/">
-            <Text>Linkedin</Text>
-            <AntDesign name="linkedin-square" size={24} color="white" />
-          </Link>
           <Link url="https://github.com/Khezac">
-            <Text>GitHub</Text>
+            <Text style={styles.padraoText}>GitHub</Text>
             <AntDesign name="github" size={24} color="white" />
+          </Link>
+          <Link url="https://www.linkedin.com/in/khezac/">
+            <Text style={styles.padraoText}>Linkedin</Text>
+            <AntDesign name="linkedin-square" size={24} color="white" />
           </Link>
         </View>
       </View>
@@ -51,13 +51,13 @@ export default function SobreNos() {
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
-          <Link url="https://www.linkedin.com/in/leoesplinio/">
-            <Text>Linkedin</Text>
-            <AntDesign name="linkedin-square" size={24} color="white" />
-          </Link>
           <Link url="https://github.com/LeoEsplinio">
-            <Text>GitHub</Text>
+            <Text style={styles.padraoText}>GitHub</Text>
             <AntDesign name="github" size={24} color="white" />
+          </Link>
+          <Link url="https://www.linkedin.com/in/leoesplinio/">
+            <Text style={styles.padraoText}>Linkedin</Text>
+            <AntDesign name="linkedin-square" size={24} color="white" />
           </Link>
         </View>
       </View>
@@ -67,13 +67,13 @@ export default function SobreNos() {
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
-          <Link url="https://www.linkedin.com/in/nimello/">
-            <Text>Linkedin</Text>
-            <AntDesign name="linkedin-square" size={24} color="white" />
-          </Link>
           <Link url="https://github.com/nimello74">
-            <Text>GitHub</Text>
+            <Text style={styles.padraoText}>GitHub</Text>
             <AntDesign name="github" size={24} color="white" />
+          </Link>
+          <Link url="https://www.linkedin.com/in/nimello/">
+            <Text style={styles.padraoText}>Linkedin</Text>
+            <AntDesign name="linkedin-square" size={24} color="white" />
           </Link>
         </View>
       </View>
@@ -83,13 +83,13 @@ export default function SobreNos() {
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
-          <Link url="https://www.linkedin.com/in/emanuel-f-2565181b6/">
-            <Text>Linkedin</Text>
-            <AntDesign name="linkedin-square" size={24} color="white" />
-          </Link>
           <Link url="https://github.com/emanuel-frs">
-            <Text>GitHub</Text>
+            <Text style={styles.padraoText}>GitHub</Text>
             <AntDesign name="github" size={24} color="white" />
+          </Link>
+          <Link url="https://www.linkedin.com/in/emanuel-f-2565181b6/">
+            <Text style={styles.padraoText}>Linkedin</Text>
+            <AntDesign name="linkedin-square" size={24} color="white" />
           </Link>
         </View>
       </View>
@@ -99,13 +99,13 @@ export default function SobreNos() {
           style={styles.foto}
         />
         <View style={styles.linksContainer}>
-          <Link url="https://www.linkedin.com/in/lucas-rodrigues-928419110/">
-            <Text>Linkedin</Text>
-            <AntDesign name="linkedin-square" size={24} color="white" />
-          </Link>
           <Link url="https://github.com/Lcs97">
-            <Text>GitHub</Text>
+            <Text style={styles.padraoText}>GitHub</Text>
             <AntDesign name="github" size={24} color="white" />
+          </Link>
+          <Link url="https://www.linkedin.com/in/lucas-rodrigues-928419110/">
+            <Text style={styles.padraoText}>Linkedin</Text>
+            <AntDesign name="linkedin-square" size={24} color="white" />
           </Link>
         </View>
       </View>

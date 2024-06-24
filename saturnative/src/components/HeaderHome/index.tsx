@@ -15,7 +15,7 @@ export default function HeaderHome() {
             }}>
                 <Feather name="menu" size={24} color="black" />
             </TouchableOpacity>
-            <Text style={{fontSize: 25}}>Home</Text>
+            <Text style={styles.padraoText}>HOME</Text>
             <Image style={{width: 50, height: 50}} source={require('../../../assets/logos/logoDark.png')}/>
         </View>
     )
@@ -33,5 +33,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#FDE251',
         flexDirection: 'row',
     },
-
+    padraoText:{
+        fontFamily: 'Museo-Moderno-Medium',
+        fontSize: 25,
+    }
 })
