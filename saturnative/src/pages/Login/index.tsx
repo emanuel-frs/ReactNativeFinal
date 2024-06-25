@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { KeyboardAvoidingView, View, Image, TouchableOpacity, TextInput, Text } from "react-native"
 import { styles } from "./styles";
 import { useNavigation } from '@react-navigation/native';
@@ -33,6 +33,17 @@ export default function Login() {
         }
     };
 
+    const limpaStorage = async () => {
+        try{
+            SecureStore.deleteItemAsync('user')
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(()=>{
+        limpaStorage();
+    },[])
     return (
         <KeyboardAvoidingView style={styles.background}>
             <View>
