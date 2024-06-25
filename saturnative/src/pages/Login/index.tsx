@@ -5,13 +5,11 @@ import { Ionicons } from "@expo/vector-icons";
 import * as SecureStore from 'expo-secure-store';
 import { User, UserContext, UserContextType } from "../../contexts/UserContext";
 
-
 export default function Login() {
-    
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalido, setInvalido] = useState<boolean>(false);
-    const {users, setEstaLogado} = useContext(UserContext) as UserContextType;
+    const { users, setEstaLogado } = useContext(UserContext) as UserContextType;
 
     const todosCamposPreenchidos = () => {
         return (
@@ -21,7 +19,7 @@ export default function Login() {
     };
 
     const handleLogin = async () => {
-        const user = users.find((user : User) => user.username === username && user.senha === password);
+        const user = users.find((user: User) => user.username === username && user.senha === password);
         if (user) {
             await SecureStore.setItemAsync('user', JSON.stringify(user))
             setInvalido(false);
@@ -31,19 +29,11 @@ export default function Login() {
         }
     };
 
-    // const limpaStorage = async () => {
-    //     try{
-    //         SecureStore.deleteItemAsync('user')
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
-    // ESTA FUNÇÂO PODERÀ SER REUTILIZADA NO BOTÂO DE LOGOUT
 
     return (
         <KeyboardAvoidingView style={styles.background}>
             <View>
-                <Image  source={require('../../../assets/saturnativeLogo.png')} style={styles.logo}/>
+                <Image source={require('../../../assets/saturnativeLogo.png')} style={styles.logo} />
             </View>
             <Text style={styles.tituloEntrar}>SATURNATIVE</Text>
             <View>
@@ -67,7 +57,7 @@ export default function Login() {
                 />
                 {invalido && <Text style={[styles.invalido, styles.padraoText]}>Email ou senha inválido</Text>}
                 <View style={styles.containerBtn}>
-                    <TouchableOpacity disabled={todosCamposPreenchidos() ? false : true} style={[todosCamposPreenchidos() ? styles.btnEntrar : styles.btnBloqueado]} onPress={handleLogin}>
+                    <TouchableOpacity disabled={!todosCamposPreenchidos()} style={[todosCamposPreenchidos() ? styles.btnEntrar : styles.btnBloqueado]} onPress={handleLogin}>
                         <Text style={styles.padraoText}> <Ionicons name="paper-plane" size={30} color="#fff" /></Text>
                     </TouchableOpacity>
                 </View>

@@ -43,7 +43,6 @@ export default function App() {
 
   const handleComplete = useCallback(() => {
     setIsSplashComplete(true);
-    SplashScreen.hideAsync();
   }, []);
 
   if (!fontsLoaded || fontError || !isSplashComplete) {

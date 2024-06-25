@@ -42,8 +42,8 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
 
   useEffect(() => {
+    getUsuarioLogado()
     fetchUsers();
-    // getUsuarioLogado()
   }, []);
 
   return (
