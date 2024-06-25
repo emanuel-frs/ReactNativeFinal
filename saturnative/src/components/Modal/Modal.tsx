@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Modal, View, Text, Pressable, StyleSheet, TouchableOpacity } from "react-native";
+import { useRefresh } from "../../contexts/RefreshContext";
 
 type TemCertezaProps = {
     visible: boolean;
@@ -9,12 +10,13 @@ type TemCertezaProps = {
 }
 
 export function TemCerteza({ visible, onClose }: TemCertezaProps) {
-    const [excluido, setExcluido] = useState(false);
     const navigation: any = useNavigation();
 
+    const { refresh, setRefresh } = useRefresh();
+
     function excluir(){
-        setExcluido(true);
         onClose();
+        setRefresh(!refresh)
         navigation.navigate('Home');
     }
 

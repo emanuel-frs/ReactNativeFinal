@@ -5,7 +5,7 @@ import { JogoEspecificoProps } from '../../routes/drawer';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { TemCerteza } from '../../components/Modal/Modal';
-import { getJogoById } from '../../services/jogosServices';
+import { deleteJogo, getJogoById } from '../../services/jogosServices';
 import { StackTypes } from '../../routes/stack';
 
 type JogoType = {
@@ -32,27 +32,44 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
         try {
             const { data } = await getJogoById(id);
             setJogo(data)
-        } catch(err) {
+        } catch (err) {
             console.log(err)
         }
         setIsLoading(false)
     }
 
-    useEffect(()=>{
+    const deletaJogo = async (id: number | string) => {
+        try {
+            const { data } = await deleteJogo(id);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
         getJogo()
-    },[])
+    }, [id])
 
     const handleEditar = () => {
-        navigation.navigate('Edicao', {id: id});
+        navigation.navigate('Edicao', { id: id });
+    }
+
+    const handleExcluir = () => {
+        setModalVisible(true)
+    }
+
+    const handleModal = async (id: number | string) => {
+        deletaJogo(id)
+        setModalVisible(false)
     }
 
     return (
         <>
-        <TemCerteza visible={modalVisible} onClose={() => setModalVisible(false)}/>
-        <View style={styles.container}>
-            {jogo && isLoading == false ? (
-                <View key={jogo.id} style={{ flex: 1 }}>
-                        <Image style={styles.jogoImg} source={{uri: jogo.img}} />
+            <TemCerteza visible={modalVisible} onClose={() => handleModal(id)} />
+            <View style={styles.container}>
+                {jogo && isLoading == false ? (
+                    <View key={jogo.id} style={{ flex: 1 }}>
+                        <Image style={styles.jogoImg} source={{ uri: jogo.img }} />
                         <View style={styles.jogoInfosWrapper}>
                             <View style={styles.jogoInfosContainer}>
                                 <Text style={[styles.jogoNome, styles.padraoText]}>
@@ -80,7 +97,7 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
                                         Editar Jogo
                                     </Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.excluirBtn} onPress={() => setModalVisible(true)}>
+                                <TouchableOpacity style={styles.excluirBtn} onPress={() => handleExcluir()}>
                                     <Text style={[styles.excluirBtnTexto, styles.padraoText]}>
                                         Excluir Jogo
                                     </Text>
@@ -88,18 +105,18 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
                             </View>
                         </View>
                     </View>
-                    ) : isLoading ? (
-                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <ActivityIndicator size={100} color={'#FDE251'}/>
-                        </View>
-                    ) : (
-                <View style={styles.erroContainer}>
-                    <Text style={[styles.naoEncontrado, styles.padraoText]}>
-                        Jogo Não Encontrado
-                    </Text>
-                </View>
-            )}
-        </View >
+                ) : isLoading ? (
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                        <ActivityIndicator size={100} color={'#FDE251'} />
+                    </View>
+                ) : (
+                    <View style={styles.erroContainer}>
+                        <Text style={[styles.naoEncontrado, styles.padraoText]}>
+                            Jogo Não Encontrado
+                        </Text>
+                    </View>
+                )}
+            </View >
         </>
     );
 }

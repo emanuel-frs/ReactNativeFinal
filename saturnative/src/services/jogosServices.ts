@@ -17,3 +17,9 @@ export const postJogo = (jogo: {}) => {
 
     return api.post(url, jogo);
 }
+
+export const deleteJogo = (id: string | number) => {
+    const url = '/jogos/' + id;
+
+    return api.delete(url);
+}
