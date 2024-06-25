@@ -19,13 +19,12 @@ export default function Cadastro() {
     const [dataValida, setDataValida] = useState(true);
     const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(null);
     const navigation = useNavigation<DrawerTypes>();
-    const { setRefresh } = useRefresh();
+    const { refresh, setRefresh } = useRefresh();
 
     const criaNovoJogo = async(jogo:{}) => {
         try {
             const { data } = await postJogo(jogo);
-            console.log(data);
-            setRefresh(prev => !prev); 
+            setRefresh(!refresh);
             navigation.navigate('Home');
         } catch(err) {
             console.log(err);
@@ -58,8 +57,9 @@ export default function Cadastro() {
                 img: imagemSelecionada,
                 preco: preco
             };
-            criaNovoJogo(novoJogo);
+             criaNovoJogo(novoJogo);
         }
+
     };
 
     return (

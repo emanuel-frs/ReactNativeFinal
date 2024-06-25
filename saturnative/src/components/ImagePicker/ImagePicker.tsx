@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { FontAwesome6 } from '@expo/vector-icons';
+import * as FileSystem from 'expo-file-system';
+
 
 interface ImagemProps {
     onImageSelected: (imageUri: string | null) => void;
@@ -15,12 +17,26 @@ const Imagem: React.FC<ImagemProps> = ({ onImageSelected }) => {
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [4, 4],
-            quality: 1,
+            quality: 0.5,
         });
+    
 
         if (!resultado.canceled && resultado.assets?.length > 0) {
-            setImagemSelecionada(resultado.assets[0].uri);
-            onImageSelected(resultado.assets[0].uri);
+            const base64Image = await convertImageToBase64(resultado.assets[0].uri);
+            setImagemSelecionada(base64Image);
+            onImageSelected(base64Image);
+        }
+    };
+
+    const convertImageToBase64 = async (uri: string): Promise<string> => {
+        try {
+            const base64 = await FileSystem.readAsStringAsync(uri, {
+                encoding: FileSystem.EncodingType.Base64,
+            });
+            return `data:image/jpeg;base64,${base64}`;
+        } catch (error) {
+            console.error('Erro ao converter imagem para base64:', error);
+            return '';
         }
     };
 
