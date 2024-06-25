@@ -79,5 +79,15 @@ export const styles = StyleSheet.create({
     },
     padraoText:{
         fontFamily: 'Museo-Moderno-Medium',
+    },
+    erroContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    naoEncontrado: {
+        color: '#FDE251',
+        fontSize: 25,
+        fontWeight: 'bold'
     }
 });

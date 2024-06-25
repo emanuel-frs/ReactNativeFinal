@@ -23,7 +23,7 @@ export default function CustomDrawerContent(props : any) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem 
+      <DrawerItem
         label="Logout"
         onPress={handleLogout}
         style={styles.logout}

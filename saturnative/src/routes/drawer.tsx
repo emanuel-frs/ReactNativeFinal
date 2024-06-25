@@ -28,12 +28,13 @@ export type HomeProps = DrawerScreenProps<DrawerNavigation, "Home">;
 export type JogoEspecificoProps = DrawerScreenProps<DrawerNavigation, "JogoEspecifico">;
 export type CadastroProps = DrawerScreenProps<DrawerNavigation, "Cadastro">;
 export type SobreNosProps = DrawerScreenProps<DrawerNavigation, "SobreNos">;
+export type EdicaoProps = DrawerScreenProps<DrawerNavigation, "Edicao">;
 
 const { Navigator, Screen } = createDrawerNavigator<DrawerNavigation>();
 
 export default function DrawerComponent() {
     return (
-        <Navigator 
+        <Navigator
             screenOptions={{
                 drawerActiveTintColor: '#FDE251',
                 drawerInactiveTintColor: '#FDE251',
@@ -57,14 +58,14 @@ export default function DrawerComponent() {
                 options={{ header: () => <HeaderHome /> }}
             />
             <Screen
-                name="SobreNos"
-                component={SobreNos}
-                options={{ header: () => <HeaderSobreNos /> }}
-            />
-            <Screen
                 name="Cadastro"
                 component={Cadastro}
                 options={{ header: () => <HeaderCadastro /> }}
+            />
+            <Screen
+                name="SobreNos"
+                component={SobreNos}
+                options={{ header: () => <HeaderSobreNos /> }}
             />
             <Screen
                 name="JogoEspecifico"

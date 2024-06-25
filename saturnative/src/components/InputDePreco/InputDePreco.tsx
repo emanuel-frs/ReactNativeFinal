@@ -10,18 +10,18 @@ const PriceInput: React.FC<PriceInputProps> = ({ onPriceChange }) => {
   const [error, setError] = useState<string>('');
 
   const handlePriceChange = (text: string) => {
-    const cleanedPrice = text.replace(/[^\d,.]/g, ''); 
+    const cleanedPrice = text.replace(/[^\d,.]/g, '');
 
     if (/^\d{0,}([,.]\d{0,2})?$/.test(cleanedPrice)) {
 
         const formattedPrice = cleanedPrice.replace('.', ',');
         setPriceText(formattedPrice);
 
-        const parsedPrice = parseFloat(formattedPrice.replace(',', '.')); 
+        const parsedPrice = parseFloat(formattedPrice.replace(',', '.'));
 
       if (!isNaN(parsedPrice)) {
-        onPriceChange(parsedPrice); 
-        setError(''); 
+        onPriceChange(parsedPrice);
+        setError('');
       } else {
         setError('Preço inválido')
       }

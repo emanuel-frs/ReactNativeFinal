@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import { TemCerteza } from '../../components/Modal/Modal';
 import { deleteJogo, getJogoById } from '../../services/jogosServices';
 import { StackTypes } from '../../routes/stack';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useRefresh } from '../../contexts/RefreshContext';
 
 type JogoType = {
     dataLancamento: string,
@@ -22,6 +24,8 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
     const [modalVisible, setModalVisible] = useState(false);
     const [jogo, setJogo] = useState<JogoType>();
     const [isLoading, setIsLoading] = useState<boolean>();
+
+    const { refresh } = useRefresh();
 
     const navigation = useNavigation<StackTypes>();
 
@@ -48,7 +52,7 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
 
     useEffect(() => {
         getJogo()
-    }, [id])
+    }, [id, refresh])
 
     const handleEditar = () => {
         navigation.navigate('Edicao', { id: id });
@@ -65,58 +69,60 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
 
     return (
         <>
-            <TemCerteza visible={modalVisible} onClose={() => handleModal(id)} />
-            <View style={styles.container}>
-                {jogo && isLoading == false ? (
-                    <View key={jogo.id} style={{ flex: 1 }}>
-                        <Image style={styles.jogoImg} source={{ uri: jogo.img }} />
-                        <View style={styles.jogoInfosWrapper}>
-                            <View style={styles.jogoInfosContainer}>
-                                <Text style={[styles.jogoNome, styles.padraoText]}>
-                                    {jogo.nome}
-                                </Text>
-                                <View style={styles.jogoInfosBasicasContainer}>
-                                    <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
-                                        Data de lançamento: <Text style={styles.jogoInfosBasicasValue}>{jogo.dataLancamento}</Text>
+            <ScrollView>
+                <TemCerteza visible={modalVisible} onClose={() => handleModal(id)} />
+                <View style={styles.container}>
+                    {jogo && isLoading == false ? (
+                        <View key={jogo.id} style={{ flex: 1 }}>
+                            <Image style={styles.jogoImg} source={{ uri: jogo.img }} />
+                            <View style={styles.jogoInfosWrapper}>
+                                <View style={styles.jogoInfosContainer}>
+                                    <Text style={[styles.jogoNome, styles.padraoText]}>
+                                        {jogo.nome}
                                     </Text>
-                                    <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
-                                        Gênero: <Text style={styles.jogoInfosBasicasValue}>{jogo.genero}</Text>
-                                    </Text>
-                                    <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
-                                        Descrição: <Text style={styles.jogoInfosBasicasValue}>{jogo.descricao}</Text>
-                                    </Text>
+                                    <View style={styles.jogoInfosBasicasContainer}>
+                                        <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
+                                            Data de lançamento: <Text style={styles.jogoInfosBasicasValue}>{jogo.dataLancamento}</Text>
+                                        </Text>
+                                        <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
+                                            Gênero: <Text style={styles.jogoInfosBasicasValue}>{jogo.genero}</Text>
+                                        </Text>
+                                        <Text style={[styles.jogoInfosBasicas, styles.padraoText]}>
+                                            Descrição: <Text style={styles.jogoInfosBasicasValue}>{jogo.descricao}</Text>
+                                        </Text>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={styles.jogoInfosContainerInferior}>
-                                <View style={styles.jogoPreçoContainer}>
-                                    <Ionicons name="pricetags-sharp" size={32} color="#FDE251" />
-                                    <Text style={[styles.jogoPreço, styles.padraoText]}>R$ {jogo.preco}</Text>
+                                <View style={styles.jogoInfosContainerInferior}>
+                                    <View style={styles.jogoPreçoContainer}>
+                                        <Ionicons name="pricetags-sharp" size={32} color="#FDE251" />
+                                        <Text style={[styles.jogoPreço, styles.padraoText]}>R$ {jogo.preco}</Text>
+                                    </View>
+                                    <TouchableOpacity style={styles.editarBtn} onPress={() => handleEditar()}>
+                                        <Text style={[styles.editBtnTexto, styles.padraoText]}>
+                                            Editar Jogo
+                                        </Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.excluirBtn} onPress={() => handleExcluir()}>
+                                        <Text style={[styles.excluirBtnTexto, styles.padraoText]}>
+                                            Excluir Jogo
+                                        </Text>
+                                    </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity style={styles.editarBtn} onPress={handleEditar}>
-                                    <Text style={[styles.editBtnTexto, styles.padraoText]}>
-                                        Editar Jogo
-                                    </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.excluirBtn} onPress={() => handleExcluir()}>
-                                    <Text style={[styles.excluirBtnTexto, styles.padraoText]}>
-                                        Excluir Jogo
-                                    </Text>
-                                </TouchableOpacity>
                             </View>
                         </View>
-                    </View>
-                ) : isLoading ? (
-                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <ActivityIndicator size={100} color={'#FDE251'} />
-                    </View>
-                ) : (
-                    <View style={styles.erroContainer}>
-                        <Text style={[styles.naoEncontrado, styles.padraoText]}>
-                            Jogo Não Encontrado
-                        </Text>
-                    </View>
-                )}
-            </View >
+                    ) : isLoading ? (
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <ActivityIndicator size={100} color={'#FDE251'} />
+                        </View>
+                    ) : (
+                        <View style={styles.erroContainer}>
+                            <Text style={[styles.naoEncontrado, styles.padraoText]}>
+                                Jogo Não Encontrado
+                            </Text>
+                        </View>
+                    )}
+                </View >
+            </ScrollView>
         </>
     );
 }

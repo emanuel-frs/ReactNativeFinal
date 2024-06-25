@@ -8,6 +8,7 @@ const Khezac = require('../../../assets/perfis/Khezac.jpg');
 const Leo = require('../../../assets/perfis/leo.webp');
 const Emanuel = require('../../../assets/perfis/Emanuel.jpg');
 const Lucas = require('../../../assets/perfis/Lucas.jpg');
+const Nicolle = require('../../../assets/perfis/nicolle.jpg');
 
 interface LinkProps {
   url: string;
@@ -63,7 +64,7 @@ export default function SobreNos() {
       </View>
       <View style={styles.containerFilho}>
         <Image
-          source={{ uri: 'https://static.vecteezy.com/ti/vetor-gratis/p3/6428556-icone-mulher-para-perfil-de-usuario-icone-feminino-humano-ou-sinal-e-simbolo-de-pessoas-vetor.jpg' }}
+          source={Nicolle}
           style={styles.foto}
         />
         <View style={styles.linksContainer}>

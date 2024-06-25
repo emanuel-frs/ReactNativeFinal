@@ -23,3 +23,9 @@ export const deleteJogo = (id: string | number) => {
 
     return api.delete(url);
 }
+
+export const updateJogoById = (id: string | number, jogoAtualizado:{}) => {
+    const url = '/jogos/' + id;
+
+    return api.put(url, jogoAtualizado);
+}
