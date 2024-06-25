@@ -2,6 +2,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { StackTypes } from "../../routes/stack";
+import { DrawerTypes } from "../../routes/drawer";
 
 type JogoCardProp = {
     jogo: {
@@ -13,7 +14,7 @@ type JogoCardProp = {
 
 export default function JogoCard({ jogo }: JogoCardProp) {
 
-    const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<DrawerTypes>();
 
     function handleDetalhes(id: number) {
         navigation.navigate("JogoEspecifico", {id: id})

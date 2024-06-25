@@ -1,11 +1,12 @@
 import { View, Image, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { JogoEspecificoProps } from '../../routes/stack';
+import { JogoEspecificoProps } from '../../routes/drawer';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { TemCerteza } from '../../components/Modal/Modal';
 import { getJogoById } from '../../services/jogosServices';
+import { StackTypes } from '../../routes/stack';
 
 type JogoType = {
     dataLancamento: string,
@@ -22,7 +23,7 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
     const [jogo, setJogo] = useState<JogoType>();
     const [isLoading, setIsLoading] = useState<boolean>();
 
-    const navigation: any = useNavigation();
+    const navigation = useNavigation<StackTypes>();
 
     const { id } = route.params;
 

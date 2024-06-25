@@ -27,22 +27,12 @@ export type SobreNosProps = NativeStackScreenProps<StackNavigation, "SobreNos">;
 
 const { Navigator, Screen } = createStackNavigator<StackNavigation>();
 
-export default function StackComponent() {
+export default function StackComponentPublico() {
     return(
-        <Navigator>
+        <Navigator initialRouteName="Login">
             <Screen
-                name="JogoEspecifico"
-                component={JogoEspecifico}
-                options={{headerShown: (false)}}
-            />
-            <Screen
-                name="Edicao"
-                component={Edicao}
-                options={{header: () => <HeaderEdicao/>}}
-            />
-            <Screen
-                name="Cadastro"
-                component={Cadastro}
+                name="Login"
+                component={Login}
                 options={{headerShown:(false)}}
             />
         </Navigator>

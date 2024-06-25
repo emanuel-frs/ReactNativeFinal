@@ -6,6 +6,7 @@ import { Splash } from "./src/components/Splash/SplashScreen";
 import { useFonts } from 'expo-font';
 import { UserProvider } from "./src/contexts/UserContext";
 import { RefreshProvider } from './src/contexts/RefreshContext';
+import Routes from "./src/routes";
 
 export default function App() {
   const [isSplashComplete, setIsSplashComplete] = useState(false);
@@ -53,7 +54,7 @@ export default function App() {
     <UserProvider>
       <RefreshProvider>
         <NavigationContainer>
-          <StackComponent />
+          <Routes/>
         </NavigationContainer>
       </RefreshProvider>
     </UserProvider>

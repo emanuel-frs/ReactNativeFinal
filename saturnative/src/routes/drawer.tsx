@@ -7,23 +7,22 @@ import { StyleSheet } from "react-native";
 import HeaderCadastro from "../components/HeaderCadastro";
 import HeaderHome from "../components/HeaderHome";
 import HeaderSobreNos from "../components/HeaderSobreNos";
-import StackComponent from "./stack";
+import HeaderJogoEspecifico from "../components/HeaderJogoEspecifico";
+import JogoEspecifico from "../pages/JogoEspecifico";
+import Edicao from "../pages/Edicao/Edicao";
+import HeaderEdicao from "../components/HeaderEdicao";
 
 export type DrawerNavigation = {
     Home: undefined,
-    JogoEspecifico: { id: number }
-    Login: undefined,
-    Edicao: undefined,
+    JogoEspecifico: { id: number | string }
     Cadastro: undefined,
     SobreNos: undefined,
-    Sair: undefined
+    Edicao: { id: number }
 }
 
 export type DrawerTypes = DrawerNavigationProp<DrawerNavigation>;
 export type HomeProps = DrawerScreenProps<DrawerNavigation, "Home">;
 export type JogoEspecificoProps = DrawerScreenProps<DrawerNavigation, "JogoEspecifico">;
-export type ScreenLogin = DrawerScreenProps<DrawerNavigation, "Login">;
-export type EdicaoProps = DrawerScreenProps<DrawerNavigation, "Edicao">;
 export type CadastroProps = DrawerScreenProps<DrawerNavigation, "Cadastro">;
 export type SobreNosProps = DrawerScreenProps<DrawerNavigation, "SobreNos">;
 
@@ -61,16 +60,15 @@ export default function DrawerComponent() {
                 options={{header: () => <HeaderCadastro/>}}
             />
             <Screen
-                name="Sair"
-                component={StackComponent}
-                options={{headerShown:(false)}}
+                name="JogoEspecifico"
+                component={JogoEspecifico}
+                options={{header: () => <HeaderJogoEspecifico/>}}
+            />
+            <Screen
+                name="Edicao"
+                component={Edicao}
+                options={{header: () => <HeaderEdicao/>}}
             />
         </Navigator>
     )
 }
-
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor: 'black'
-    }
-})
