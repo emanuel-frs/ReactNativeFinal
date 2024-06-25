@@ -64,7 +64,7 @@ export default function Cadastro() {
 
     return (
         <>
-            <ScrollView>
+            <ScrollView style={styles.scroll}>
                 <View style={styles.container}>
                     <View style={styles.forms}>
                         <View style={styles.imagem}>

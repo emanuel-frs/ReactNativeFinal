@@ -83,7 +83,7 @@ export default function Edicao({route}:EdicaoProps) {
 
     return (
         <>
-            <ScrollView>
+            <ScrollView style={styles.scroll}>
                 <View style={styles.container}>
                         {id && isLoading == false ? (
                             <>

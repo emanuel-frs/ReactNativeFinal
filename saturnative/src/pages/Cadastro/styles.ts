@@ -79,5 +79,8 @@ export const styles = StyleSheet.create({
     },
     padraoText:{
         fontFamily: 'Museo-Moderno-Medium',
+    },
+    scroll:{
+        backgroundColor: '#14151E'
     }
 });

@@ -1,4 +1,4 @@
-import { View, Image, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { JogoEspecificoProps } from '../../routes/drawer';
@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import { TemCerteza } from '../../components/Modal/Modal';
 import { deleteJogo, getJogoById } from '../../services/jogosServices';
 import { StackTypes } from '../../routes/stack';
-import { ScrollView } from 'react-native-gesture-handler';
 import { useRefresh } from '../../contexts/RefreshContext';
 
 type JogoType = {
@@ -69,7 +68,7 @@ export default function JogoEspecifico({ route }: JogoEspecificoProps) {
 
     return (
         <>
-            <ScrollView>
+            <ScrollView style={styles.scroll}>
                 <TemCerteza visible={modalVisible} onClose={() => handleModal(id)} />
                 <View style={styles.container}>
                     {jogo && isLoading == false ? (
