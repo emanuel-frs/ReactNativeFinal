@@ -5,6 +5,7 @@ import InputDeData from '../../components/InputDeData/InputDeData';
 import PriceInput from '../../components/InputDePreco/InputDePreco';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./styles";
+import { useRefresh } from '../../contexts/RefreshContext';
 
 export default function Edicao() {
     const [nomeJogo, setNomeJogo] = useState('');
@@ -16,11 +17,11 @@ export default function Edicao() {
     const [enviado, setEnviado] = useState(false);
     const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(null);
     const navigation = useNavigation();
-
+    const { setRefresh } = useRefresh();
 
     const handleCancelar = () => {
-        navigation.goBack()
-    }
+        navigation.goBack();
+    };
 
     const todosCamposPreenchidos = () => {
         return (
@@ -43,8 +44,11 @@ export default function Edicao() {
             console.log('Preço:', preco);
             console.log('Imagem:', imagemSelecionada);
             setEnviado(true);
+            setRefresh(prev => !prev); 
+            navigation.navigate('Home');
         }
     };
+
 
     return (
         <>

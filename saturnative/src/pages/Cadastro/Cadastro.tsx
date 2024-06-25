@@ -8,6 +8,7 @@ import { styles } from "./styles";
 import { ScrollView } from 'react-native-gesture-handler';
 import { postJogo } from '../../services/jogosServices';
 import { DrawerTypes } from '../../routes/drawer';
+import { useRefresh } from '../../contexts/RefreshContext';
 
 export default function Cadastro() {
     const [nomeJogo, setNomeJogo] = useState('');
@@ -18,19 +19,22 @@ export default function Cadastro() {
     const [dataValida, setDataValida] = useState(true);
     const [imagemSelecionada, setImagemSelecionada] = useState<string | null>(null);
     const navigation = useNavigation<DrawerTypes>();
+    const { setRefresh } = useRefresh();
 
     const criaNovoJogo = async(jogo:{}) => {
         try {
-            const {data} = await postJogo(jogo)
-            console.log(data)
+            const { data } = await postJogo(jogo);
+            console.log(data);
+            setRefresh(prev => !prev); 
+            navigation.navigate('Home');
         } catch(err) {
-            console.log(err)
+            console.log(err);
         }
-    }
+    };
 
     const handleCancelar = () => {
-        navigation.goBack()
-    }
+        navigation.goBack();
+    };
 
     const todosCamposPreenchidos = () => {
         return (
@@ -53,7 +57,7 @@ export default function Cadastro() {
                 descricao: descricao,
                 img: imagemSelecionada,
                 preco: preco
-            }
+            };
             criaNovoJogo(novoJogo);
         }
     };

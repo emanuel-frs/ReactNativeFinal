@@ -3,10 +3,12 @@ import { styles } from './styles';
 import JogoCard from '../../components/JogoCard';
 import { useEffect, useState } from 'react';
 import { getAllJogos } from '../../services/jogosServices';
+import { useRefresh } from '../../contexts/RefreshContext';
 
 export default function Home() {
     const [jogos, setJogos] = useState();
     const [isLoading, setIsLoading] = useState<boolean>();
+    const { refresh } = useRefresh();
 
     const getProdutosData = async () => {
         setIsLoading(true)
@@ -21,7 +23,7 @@ export default function Home() {
 
     useEffect(()=>{
         getProdutosData()
-    },[])
+    },[refresh])
 
     return (
         <View style={styles.container}>
