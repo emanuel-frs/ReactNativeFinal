@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { getUsuarios } from '../services/usuariosServices';
+import * as SecureStore from 'expo-secure-store';
 
 export interface User {
   id: number;
@@ -28,8 +29,21 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       console.error('Erro ao buscar usuários:', error);
     }
   };
+
+  const getUsuarioLogado = async () => {
+    try{
+      const UsuarioLogado = await SecureStore.getItemAsync('user');
+      if(UsuarioLogado){
+        setEstaLogado(true);
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     fetchUsers();
+    // getUsuarioLogado()
   }, []);
 
   return (

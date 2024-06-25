@@ -23,7 +23,7 @@ export default function Login() {
     const handleLogin = async () => {
         const user = users.find((user : User) => user.username === username && user.senha === password);
         if (user) {
-            await SecureStore.setItemAsync('user', JSON.stringify(user));
+            await SecureStore.setItemAsync('user', JSON.stringify(user))
             setInvalido(false);
             setEstaLogado(true)
         } else {
@@ -31,17 +31,15 @@ export default function Login() {
         }
     };
 
-    const limpaStorage = async () => {
-        try{
-            SecureStore.deleteItemAsync('user')
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    // const limpaStorage = async () => {
+    //     try{
+    //         SecureStore.deleteItemAsync('user')
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
+    // ESTA FUNÇÂO PODERÀ SER REUTILIZADA NO BOTÂO DE LOGOUT
 
-    useEffect(()=>{
-        limpaStorage();
-    },[])
     return (
         <KeyboardAvoidingView style={styles.background}>
             <View>
