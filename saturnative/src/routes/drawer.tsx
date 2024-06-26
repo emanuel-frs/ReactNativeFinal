@@ -65,7 +65,10 @@ export default function DrawerComponent() {
             <Screen
                 name="SobreNos"
                 component={SobreNos}
-                options={{ header: () => <HeaderSobreNos /> }}
+                options={{
+                    header: () => <HeaderSobreNos />,
+                    title: 'Sobre Nós'
+                }}
             />
             <Screen
                 name="JogoEspecifico"

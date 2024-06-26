@@ -21,12 +21,12 @@ export default function Cadastro() {
     const navigation = useNavigation<DrawerTypes>();
     const { refresh, setRefresh } = useRefresh();
 
-    const criaNovoJogo = async(jogo:{}) => {
+    const criaNovoJogo = async (jogo: {}) => {
         try {
             const { data } = await postJogo(jogo);
             setRefresh(!refresh);
             navigation.navigate('Home');
-        } catch(err) {
+        } catch (err) {
             console.log(err);
         }
     };
@@ -57,14 +57,14 @@ export default function Cadastro() {
                 img: imagemSelecionada,
                 preco: preco
             };
-             criaNovoJogo(novoJogo);
+            criaNovoJogo(novoJogo);
         }
 
     };
 
     return (
         <>
-            <ScrollView style={styles.scroll}>
+            <ScrollView>
                 <View style={styles.container}>
                     <View style={styles.forms}>
                         <View style={styles.imagem}>
