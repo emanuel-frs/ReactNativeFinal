@@ -7,9 +7,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#14151E',
         padding: 40,
-        paddingBottom: 0
+        paddingBottom: 0,
     },
-
     logo: {
         marginTop: -20,
         maxWidth: 209, 
@@ -85,5 +84,19 @@ export const styles = StyleSheet.create({
     },
     padraoText:{
         fontFamily: 'Museo-Moderno-Medium',
+    },
+    semConexao: {
+        backgroundColor: '#D92744',
+        width: '100%',
+        alignItems: 'center',
+        borderRadius: 50,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        height: 40,
+        position: 'absolute',
+        top: 40
+    },
+    semConexaoTxt: {
+        color: 'white'
     }
 });

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { getUsuarios } from '../services/usuariosServices';
 import * as SecureStore from 'expo-secure-store';
+import * as Network from 'expo-network';
 
 export interface User {
   id: number;
@@ -10,8 +11,9 @@ export interface User {
 
 export interface UserContextType {
   users: User[];
-  setEstaLogado: any;// RESOLVER AMBAS TIPAGENS
-  estaLogado: any;
+  setEstaLogado: any;
+  estaLogado: boolean;
+  estaConectado: boolean;
 }
 
 
@@ -19,7 +21,8 @@ export const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [users, setUsers] = useState<User[]>([]);
-  const [estaLogado, setEstaLogado] = useState(false);
+  const [estaLogado, setEstaLogado] = useState<boolean>(false);
+  const [estaConectado, setEstaConectado] = useState<boolean>(true);
 
   const fetchUsers = async () => {
     try {
@@ -29,6 +32,17 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       console.error('Erro ao buscar usuários:', error);
     }
   };
+
+  const fetchConnection = async () => {
+    try {
+      if((await Network.getNetworkStateAsync()).isConnected){
+        setEstaConectado(true)
+      }
+    } catch (err) {
+      setEstaConectado(false)
+      console.log(err)
+    }
+  }
 
   const getUsuarioLogado = async () => {
     try{
@@ -44,10 +58,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   useEffect(() => {
     getUsuarioLogado()
     fetchUsers();
+    fetchConnection()
   }, []);
 
   return (
-    <UserContext.Provider value={{ users, setEstaLogado, estaLogado }}>
+    <UserContext.Provider value={{ users, setEstaLogado, estaLogado, estaConectado }}>
       {children}
     </UserContext.Provider>
   );

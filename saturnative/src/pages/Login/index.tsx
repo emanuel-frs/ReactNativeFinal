@@ -9,7 +9,8 @@ export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [invalido, setInvalido] = useState<boolean>(false);
-    const { users, setEstaLogado } = useContext(UserContext) as UserContextType;
+    const [btnDesabilitado, setBtnDesabilitado] = useState<boolean>(true);
+    const { users, setEstaLogado, estaConectado } = useContext(UserContext) as UserContextType;
 
     const todosCamposPreenchidos = () => {
         return (
@@ -29,39 +30,53 @@ export default function Login() {
         }
     };
 
+    useEffect(() => {
+        if(estaConectado && todosCamposPreenchidos()){
+            setBtnDesabilitado(false)
+        } else {
+            setBtnDesabilitado(true)
+        }
+    },[password,username,estaConectado])
 
     return (
-        <KeyboardAvoidingView style={styles.background}>
-            <View>
-                <Image source={require('../../../assets/saturnativeLogo.png')} style={styles.logo} />
-            </View>
-            <Text style={styles.tituloEntrar}>SATURNATIVE</Text>
-            <View>
-                <Text style={[styles.tituloEntrar2, styles.padraoText]}>Entrar</Text>
-            </View>
-            <View style={styles.containerLogin}>
-                <Text style={[styles.textImput, styles.padraoText]}>Usuário</Text>
-                <TextInput
-                    style={[styles.input, styles.padraoText]}
-                    placeholder=''
-                    autoCorrect={false}
-                    onChangeText={(text) => setUsername(text)}
-                />
-                <Text style={[styles.textImput, styles.padraoText]}>Senha</Text>
-                <TextInput
-                    style={[styles.input, styles.padraoText, invalido && styles.inputErro]}
-                    placeholder=''
-                    autoCorrect={false}
-                    secureTextEntry
-                    onChangeText={(text) => setPassword(text)}
-                />
-                {invalido && <Text style={[styles.invalido, styles.padraoText]}>Email ou senha inválido</Text>}
-                <View style={styles.containerBtn}>
-                    <TouchableOpacity disabled={!todosCamposPreenchidos()} style={[todosCamposPreenchidos() ? styles.btnEntrar : styles.btnBloqueado]} onPress={handleLogin}>
-                        <Text style={styles.padraoText}> <Ionicons name="paper-plane" size={30} color="#fff" /></Text>
-                    </TouchableOpacity>
+            <KeyboardAvoidingView style={styles.background}>
+                {!estaConectado &&
+                <View style={styles.semConexao}>
+                    <Text style={styles.semConexaoTxt}>
+                        Dispositivo sem conexão com a internet
+                    </Text>
                 </View>
-            </View>
-        </KeyboardAvoidingView>
+                }
+                <View>
+                    <Image source={require('../../../assets/saturnativeLogo.png')} style={styles.logo} />
+                </View>
+                <Text style={styles.tituloEntrar}>SATURNATIVE</Text>
+                <View>
+                    <Text style={[styles.tituloEntrar2, styles.padraoText]}>Entrar</Text>
+                </View>
+                <View style={styles.containerLogin}>
+                    <Text style={[styles.textImput, styles.padraoText]}>Usuário</Text>
+                    <TextInput
+                        style={[styles.input, styles.padraoText]}
+                        placeholder=''
+                        autoCorrect={false}
+                        onChangeText={(text) => setUsername(text)}
+                    />
+                    <Text style={[styles.textImput, styles.padraoText]}>Senha</Text>
+                    <TextInput
+                        style={[styles.input, styles.padraoText, invalido && styles.inputErro]}
+                        placeholder=''
+                        autoCorrect={false}
+                        secureTextEntry
+                        onChangeText={(text) => setPassword(text)}
+                    />
+                    {invalido && <Text style={[styles.invalido, styles.padraoText]}>Email ou senha inválido</Text>}
+                    <View style={styles.containerBtn}>
+                        <TouchableOpacity disabled={btnDesabilitado} style={[!btnDesabilitado ? styles.btnEntrar : styles.btnBloqueado]} onPress={handleLogin}>
+                            <Text style={styles.padraoText}> <Ionicons name="paper-plane" size={30} color="#fff" /></Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </KeyboardAvoidingView>
     );
 }
